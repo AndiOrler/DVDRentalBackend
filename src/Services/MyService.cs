@@ -1,9 +1,17 @@
+using Models;
+
 namespace Services;
 public class MyService
 {
-    public String GetString()
+    public IEnumerable<WeatherForecast> GetString(String[] strings)
     {
-        return "hello world";
+        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        {
+            Date = DateTime.Now.AddDays(index),
+            TemperatureC = Random.Shared.Next(-20, 55),
+            Summary = strings[Random.Shared.Next(strings.Length)]
+        })
+        .ToArray();
     }
 
 }
